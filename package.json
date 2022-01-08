@@ -1,22 +1,41 @@
 {
   "name": "fastify-api",
   "version": "1.0.0",
-  "description": "A blazing fast REST APIs with Node.js, MongoDB, Fastify and Swagger.",
+  "description": "Shopify task",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
-  "author": "Siegfried Grimbeek <siegfried.grimbeek@gmail.com> (www.siegfriedgrimbeek.co.za)",
+  "author": "Purnashis",
   "license": "ISC",
   "dependencies": {
     "boom": "^7.2.2",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
     "fastify": "^1.13.0",
+    "fastify-env": "^2.1.1",
+    "fastify-formbody": "^5.2.0",
     "fastify-mongodb": "^0.9.1",
     "fastify-swagger": "^0.15.3",
-    "mongoose": "^5.3.14"
+    "mongoose": "^5.3.14",
+    "point-of-view": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.7"
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "nodemon": "^1.18.7",
+    "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
