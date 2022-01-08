@@ -1,0 +1,94 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.1/fetch.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Inventory</h1>
+    <div class="position-sticky pt-md-5">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span class="ml-2">Dashboard</span>
+              </a>
+            </li>
+            
+          </ul>
+      </div>
+      <form action="/api/items" method="POST" >
+        <label for="name">name:</label><br>
+        <input type="text" id="name" name="name" value="item"><br>
+        <label for="group">group:</label><br>
+        <input type="text" id="group" name="group" value="Doe"><br><br>
+        <input type="submit" value="Submit">
+      </form>
+      <div id="fullview">
+        
+
+      </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+<script >
+
+
+function getItems() {
+    var queryURL = "http://0.0.0.0:3000/api/items";
+
+    fetch(queryURL)
+            .then(function (response) {
+                // response.json() returns a json string,
+                // returning it will convert it 
+                // to a pure JavaScript 
+                // object for the next then's callback
+                return response.json();
+            })
+            .then(function (users) {
+                // users is a JavaScript object here
+                displayUsersAsATable(users.items);
+            })
+            .catch(function (error) {
+                console.log('Error during fetch: ' + error.message);
+            });
+}
+
+function displayUsersAsATable(users) {
+    // users is a JavaScript object
+
+    // empty the div that contains the results
+    var usersDiv = document.querySelector("#viewd");
+    usersDiv.innerHTML = "";
+
+
+    // iterate on the array of users
+    users.forEach(function (currentUser) {
+        // creates a row
+        usersDiv.innerHTML+=
+            `<tr>  
+                <td>${currentUser.name}</td>
+                <td>${currentUser.group}</td>
+              </tr>`
+        
+        
+    });
+
+    // adds the table to the div
+}
+
+</script>

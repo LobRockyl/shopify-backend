@@ -1,0 +1,194 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.10.1/fetch.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <h1>Inventory</h1>
+    <div class="position-sticky pt-md-5">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span class="ml-2">Dashboard</span>
+              </a>
+            </li>
+            <h2>Views</h2>
+            <li class="nav-item">
+              <button class="btn" onclick="getItems()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                <span class="ml-2">Items</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <button class="btn" onclick="getGroupedItems()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <span class="ml-2">Groupwise items</span>
+                </a>
+              </li>
+              <h2>Operations</h2>
+            <li class="nav-item">
+              <a class="nav-link" href="/create">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="30" height="30"
+                viewBox="0 0 30 30"
+                style=" fill:#000000;">    <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M21,16h-5v5 c0,0.553-0.448,1-1,1s-1-0.447-1-1v-5H9c-0.552,0-1-0.447-1-1s0.448-1,1-1h5V9c0-0.553,0.448-1,1-1s1,0.447,1,1v5h5 c0.552,0,1,0.447,1,1S21.552,16,21,16z"></path></svg>
+                <span class="ml-2">Create Item</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/edit">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="30" height="30"
+                viewBox="0 0 30 30"
+                style=" fill:#000000;"><path d="M24,11l2.414-2.414c0.781-0.781,0.781-2.047,0-2.828l-2.172-2.172c-0.781-0.781-2.047-0.781-2.828,0L19,6L24,11z M17,8	L5.26,19.74c0,0,0.918-0.082,1.26,0.26c0.342,0.342,0.06,2.58,0.48,3s2.644,0.124,2.963,0.443c0.319,0.319,0.297,1.297,0.297,1.297	L22,13L17,8z M4.328,26.944l-0.015-0.007C4.213,26.97,4.111,27,4,27c-0.552,0-1-0.448-1-1c0-0.111,0.03-0.213,0.063-0.313	l-0.007-0.015L4,23l1.5,1.5L7,26L4.328,26.944z"></path></svg>                <span class="ml-2">Edit Item</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/delete">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="30" height="30"
+                viewBox="0 0 30 30"
+                style=" fill:#000000;">    <path d="M 14.984375 2.4863281 A 1.0001 1.0001 0 0 0 14 3.5 L 14 4 L 8.5 4 A 1.0001 1.0001 0 0 0 7.4863281 5 L 6 5 A 1.0001 1.0001 0 1 0 6 7 L 24 7 A 1.0001 1.0001 0 1 0 24 5 L 22.513672 5 A 1.0001 1.0001 0 0 0 21.5 4 L 16 4 L 16 3.5 A 1.0001 1.0001 0 0 0 14.984375 2.4863281 z M 6 9 L 7.7929688 24.234375 C 7.9109687 25.241375 8.7633438 26 9.7773438 26 L 20.222656 26 C 21.236656 26 22.088031 25.241375 22.207031 24.234375 L 24 9 L 6 9 z"></path></svg>                <span class="ml-2">Delete</span>
+              </a>
+            </li>
+            
+          </ul>
+      </div>
+      <div id="fullview">
+        <table class="table" id="tbl">
+            <thead>
+             
+            </thead>
+            <tbody id = "viewd">
+              
+            </tbody>
+          </table>
+
+      </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+<script >
+
+function getGroupedItems() {
+    var queryURL = "http://0.0.0.0:3000/api/groupeditems";
+
+    fetch(queryURL)
+            .then(function (response) {
+                // response.json() returns a json string,
+                // returning it will convert it 
+                // to a pure JavaScript 
+                // object for the next then's callback
+                return response.json();
+            })
+            .then(function (users) {
+                // users is a JavaScript object here
+                displayGroups(users.items);
+                console.log(users)
+            })
+            .catch(function (error) {
+                console.log('Error during getgropeditems: ' + error.message);
+            });
+}
+function getItems() {
+    var queryURL = "http://0.0.0.0:3000/api/items";
+
+    fetch(queryURL)
+            .then(function (response) {
+                // response.json() returns a json string,
+                // returning it will convert it 
+                // to a pure JavaScript 
+                // object for the next then's callback
+                return response.json();
+            })
+            .then(function (users) {
+                // users is a JavaScript object here
+                displayUsersAsATable(users.items);
+            })
+            .catch(function (error) {
+                console.log('Error during getItems: ' + error.message);
+            });
+}
+
+function displayUsersAsATable(users) {
+    // users is a JavaScript object
+
+    // empty the div that contains the results
+    var usersDiv = document.querySelector("#tbl");
+    usersDiv.innerHTML = `<thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group</th>
+              </tr>
+            </thead>`;
+
+
+    // iterate on the array of users
+    users.forEach(function (currentUser) {
+        // creates a row
+        usersDiv.innerHTML+=
+            `<tr>  
+                <td>${JSON.stringify(currentUser._id)}</td>
+                <td>${currentUser.name}</td>
+                <td>${currentUser.group}</td>
+              </tr>`
+        
+        
+    });
+
+    // adds the table to the div
+}
+function displayGroups(data) {
+    // users is a JavaScript object
+
+    // empty the div that contains the results
+    var usersDiv = document.querySelector("#tbl");
+    usersDiv.innerHTML = `<thead>
+              <tr>
+                <th scope="col">group</th>
+                <th scope="col">items</th>
+              </tr>
+            </thead>`;
+
+
+    // iterate on the array of users
+    data.forEach(function (currentUser) {
+        // creates a row
+        var arr = currentUser.doc
+        var curr_grp = currentUser._id
+        usersDiv.innerHTML+=
+           `
+            <div class="toast-header">
+                <strong class="me-auto">${curr_grp}</strong>
+                ${JSON.stringify(reformat(arr))}
+            </div>  
+            `
+    });
+
+    // adds the table to the div
+}
+function reformat(a){
+    h=[]
+    a.forEach(ele =>{
+        h.push(ele.name)
+    })
+    return h
+}
+</script>
